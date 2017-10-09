@@ -6,6 +6,9 @@ class Livre {
     Date dateParution
     String ISBN
     String auteur
+    Bibliotheque bibliotheque
+
+    static embedded = ['bibliotheque']
 
     static constraints = {
     }
