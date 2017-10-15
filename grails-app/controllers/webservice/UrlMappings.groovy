@@ -16,5 +16,6 @@ class UrlMappings {
 
         // custom url mappings
         get "/api/livre/$id(.$format)?"(controller: "api", action:"livre")
+        post "/api/livre?"(controller: "api", action:"livre")
     }
 }

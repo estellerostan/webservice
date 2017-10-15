@@ -1,6 +1,5 @@
 package org.mbds.tprest.webservice
 
-
 class ApiController {
 
     def index() {
@@ -8,6 +7,21 @@ class ApiController {
     }
 
     def livre() {
-        response.status = 200
+
+        switch (request.getMethod()) {
+            case "POST":
+                response.status = 201
+                break;
+
+            case "GET":
+                response.status = 200;
+                break;
+
+            default:
+                response.status = 405;
+                break;
+        }
+
+
     }
 }
