@@ -1,5 +1,7 @@
 package org.mbds.tprest.webservice
 
+import grails.converters.JSON
+
 class ApiController {
 
     def index() {
@@ -14,7 +16,13 @@ class ApiController {
                 break
 
             case "POST":
-                response.status = 201
+                def values = [nom: params.nom, dateParution: JSON.parse(params.dateParution), ISBN: params.ISBN, auteur: params.auteur]
+                Livre livre = new Livre(values)
+
+                if (livre.save(flush: true))
+                    response.status = 201
+                else
+                    response.status = 400
                 break
 
             case "PUT":
