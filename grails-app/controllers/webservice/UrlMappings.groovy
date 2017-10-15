@@ -13,5 +13,8 @@ class UrlMappings {
         "/"(controller: 'application', action:'index')
         "500"(view: '/error')
         "404"(view: '/notFound')
+
+        // custom url mappings
+        get "/api/livre/$id(.$format)?"(controller: "api", action:"livre")
     }
 }
