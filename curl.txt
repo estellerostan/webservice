@@ -1,0 +1,5 @@
+# lis une représentation de ma ressource par id
+ curl -i  localhost:8080/bibliothequelivreservice/livre/1
+
+ # lis la représentation de la collection de livres
+ curl -i  localhost:8080/bibliothequelivreservice/livres/
