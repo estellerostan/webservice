@@ -9,19 +9,25 @@ class ApiController {
     def livre() {
 
         switch (request.getMethod()) {
+            case "GET":
+                response.status = 200
+                break
+
             case "POST":
                 response.status = 201
-                break;
+                break
 
-            case "GET":
-                response.status = 200;
-                break;
+            case "PUT":
+                response.status = 201
+                break
+
+            case "DELETE":
+                response.status = 200
+                break
 
             default:
-                response.status = 405;
-                break;
+                response.status = 405
+                break
         }
-
-
     }
 }
