@@ -15,7 +15,11 @@ class UrlMappings {
         "404"(view: '/notFound')
 
         // custom url mappings
+
+        // représentation de la ressource livre par id
         get "/api/livre/$id(.$format)?"(controller: "api", action:"livre")
+        get "/api/livre?"(controller: "api", action:"livre")
+
         post "/api/livre?"(controller: "api", action:"livre")
     }
 }
