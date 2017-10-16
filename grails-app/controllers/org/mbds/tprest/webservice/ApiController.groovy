@@ -25,7 +25,7 @@ class ApiController {
                         render leLivre as JSON
                     }
                 } else { // représentation de ma collection
-                    response.status = 404
+                    render Livre.findAll() as JSON
                 }
                 break
 
