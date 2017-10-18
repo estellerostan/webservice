@@ -9,5 +9,6 @@ class Bibliotheque {
     static hasMany = [livres:Livre]
 
     static constraints = {
+        livres nullable:true
     }
 }

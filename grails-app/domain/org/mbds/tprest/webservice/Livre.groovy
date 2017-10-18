@@ -4,10 +4,10 @@ class Livre {
 
     String nom
     Date dateParution
-    String ISBN
+    String isbn
     String auteur
 
-    static belongsTo = Bibliotheque
+    static belongsTo = [bibliotheque:Bibliotheque]
 
     static constraints = {
     }
