@@ -24,6 +24,8 @@ class UrlMappings {
         get "/api/livres/"(controller: "api", action:"livre")
         get "/api/livre/"(controller: "api", action:"livre")
 
-        post "/api/livre?"(controller: "api", action:"livre")
+//        post "/api/livre?"(controller: "api", action:"livre")
+
+        get "/api/bibliotheque/$id(.$format)?"(controller: "api", action:"bibliotheque")
     }
 }

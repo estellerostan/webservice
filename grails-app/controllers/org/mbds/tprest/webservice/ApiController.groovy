@@ -1,6 +1,7 @@
 package org.mbds.tprest.webservice
 
 import grails.converters.JSON
+import grails.converters.XML
 
 class ApiController {
 
@@ -16,13 +17,21 @@ class ApiController {
                 // représentation de ma ressource par id
                 if (params.id != null) {
 
-                    Livre leLivre = ((Livre.findById( params.id) == null) ? null : Livre.findById(params.id))
+                    Livre leLivre = ((Livre.findById(params.id) == null) ? null : Livre.findById(params.id))
 
                     if (leLivre == null)
                         response.status = 404
                     else {
                         response.status = 200
-                        render leLivre as JSON
+
+                        switch (request.getHeader("Accept")) {
+                            case "application/json":
+                                render leLivre as JSON
+                                break
+                            case "text/xml":
+                                render leLivre as XML
+                                break
+                        }
                     }
                 } else { // représentation de ma collection
                     render Livre.findAll() as JSON
@@ -51,5 +60,9 @@ class ApiController {
                 response.status = 405
                 break
         }
+    }
+
+    def bibliotheque() {
+        render Bibliotheque.findById(params.id) as JSON
     }
 }
