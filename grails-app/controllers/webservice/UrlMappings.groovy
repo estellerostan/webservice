@@ -23,5 +23,9 @@ class UrlMappings {
 
         get "/api/bibliotheques/"(controller: "api", action:"bibliotheque")
         get "/api/bibliotheque/"(controller: "api", action:"bibliotheque")
+
+        // ressources liées
+        get "/api/bibliotheque/$id(.$format)?/livres/"(controller: "api", action:"bibliothequelivre")
+        get "/api/bibliotheque/$id(.$format)?/livre/"(controller: "api", action:"bibliothequelivre")
     }
 }

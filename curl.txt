@@ -9,3 +9,6 @@ curl -H "Accept: application/xml" -i  localhost:8080/bibliothequelivreservice/ap
 curl  -i  localhost:8080/bibliothequelivreservice/api/livres/
 curl -H "Accept: application/json" -i  localhost:8080/bibliothequelivreservice/api/livres/
 curl -H "Accept: application/xml" -i  localhost:8080/bibliothequelivreservice/api/livres/
+
+# get ressources liées
+curl -H "Accept: application/json"  -i  localhost:8080/bibliothequelivreservice/api/bibliotheque/1/livres/

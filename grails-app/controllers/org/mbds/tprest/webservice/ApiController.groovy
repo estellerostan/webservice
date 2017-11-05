@@ -142,4 +142,29 @@ class ApiController {
                 break
         }
     }
+
+    def bibliothequelivre() {
+        switch (request.method) {
+            case "GET":
+
+                // représentation de ma ressource par id
+                if (params.id != null) {
+                    def livresbibliotheque = Bibliotheque.get(params.id).livres.asList()
+
+                    if (livresbibliotheque) {
+                        switch (request.getHeader("Accept")) {
+                            case "application/json":
+                                render livresbibliotheque as JSON
+                                break
+                            case "application/xml":
+                                render livresbibliotheque as XML
+                                break
+                            default:
+                                render livresbibliotheque as JSON
+                                break
+                        }
+                    }
+                }
+        }
+    }
 }
