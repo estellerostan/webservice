@@ -1,5 +1,11 @@
-# lis une représentation de ma ressource par id
- curl -i  localhost:8080/bibliothequelivreservice/livre/1
+# lis une représentation de ma ressource par id avec la réponse par defaut en JSON
+curl -i  localhost:8080/bibliothequelivreservice/livre/1
+# on la veut spécifiquement en JSON
+curl -H "Accept: application/json"  -i  localhost:8080/bibliothequelivreservice/api/livre/1
+# ou en XML
+curl -H "Accept: application/xml" -i  localhost:8080/bibliothequelivreservice/api/livre/1
 
- # lis la représentation de la collection de livres
- curl -i  localhost:8080/bibliothequelivreservice/livres/
+# lis la représentation de la collection de livres
+curl  -i  localhost:8080/bibliothequelivreservice/api/livres/
+curl -H "Accept: application/json" -i  localhost:8080/bibliothequelivreservice/api/livres/
+curl -H "Accept: application/xml" -i  localhost:8080/bibliothequelivreservice/api/livres/

@@ -11,30 +11,46 @@ class ApiController {
 
     def livre() {
 
-        switch (request.getMethod()) {
+        switch (request.method) {
             case "GET":
 
                 // représentation de ma ressource par id
                 if (params.id != null) {
 
-                    Livre leLivre = ((Livre.findById(params.id) == null) ? null : Livre.findById(params.id))
+                    Livre leLivre = Livre.findById(params.id)
 
-                    if (leLivre == null)
-                        response.status = 404
-                    else {
-                        response.status = 200
-
+                    if (leLivre) {
                         switch (request.getHeader("Accept")) {
                             case "application/json":
                                 render leLivre as JSON
                                 break
-                            case "text/xml":
+                            case "application/xml":
                                 render leLivre as XML
                                 break
+                            default:
+                                render leLivre as JSON
+                                break
                         }
+                    } else {
+                    response.status = 404
                     }
                 } else { // représentation de ma collection
-                    render Livre.findAll() as JSON
+                    def livres = Livre.findAll()
+                    if (livres){
+                        switch (request.getHeader("Accept")) {
+                            case "application/json":
+                                render livres as JSON
+                                break
+                            case "application/xml":
+                                render livres as XML
+                                break
+                            default:
+                                render livres as JSON
+                        }
+                    }
+                    else {
+                        response.status = 404
+                    }
                 }
                 break
 
@@ -63,6 +79,67 @@ class ApiController {
     }
 
     def bibliotheque() {
-        render Bibliotheque.findById(params.id) as JSON
+        switch (request.method) {
+            case "GET":
+
+                // représentation de ma ressource par id
+                if (params.id != null) {
+
+                    def bibliotheque = Bibliotheque.get(params.id)
+
+                    if (bibliotheque) {
+                        switch (request.getHeader("Accept")) {
+                            case "application/json":
+                                render bibliotheque as JSON
+                                break
+                            case "application/xml":
+                                render bibliotheque as XML
+                                break
+                            default:
+                                render bibliotheque as JSON
+                                break
+                        }
+                    } else {
+                        response.status = 404
+                    }
+                } else { // représentation de ma collection
+                    def bibliotheques = Bibliotheque.findAll()
+                    if (bibliotheques) {
+                        switch (request.getHeader("Accept")) {
+                            case "application/json":
+                                render bibliotheques as JSON
+                                break
+                            case "application/xml":
+                                render bibliotheques as XML
+                                break
+                        }
+                    } else {
+                        response.status = 404
+                    }
+                }
+                break
+
+            case "POST":
+                def values = [nom: params.nom, adresse: params.adresse , anneeConstruction: params.anneeConstruction as Integer]
+                def bibliotheque = new Bibliotheque(values)
+
+                if (bibliotheque.save(flush: true))
+                    response.status = 201
+                else
+                    response.status = 400
+                break
+
+            case "PUT":
+                response.status = 201
+                break
+
+            case "DELETE":
+                response.status = 200
+                break
+
+            default:
+                response.status = 405
+                break
+        }
     }
 }
